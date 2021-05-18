@@ -102,6 +102,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     salaCorreta.usuarios = usuariosResetados;
     salaCorreta.baralho = cartas;
+    salaCorreta.espera = false;
+    salaCorreta.rodada = 1;
 
     db[salaIndex] = salaCorreta;
 
