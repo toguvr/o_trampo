@@ -1,0 +1,371 @@
+[
+  {
+    "id": 0,
+    "espera": false,
+    "nome": "Tavim",
+    "adminId": 1,
+    "rodada": 0,
+    "baralho": [],
+    "usuarios": [
+      {
+        "id": 1,
+        "nome": "Guto",
+        "avatar": "https://image.freepik.com/vetores-gratis/logotipo-do-avatar-pro-gamer_71220-49.jpg",
+        "cartas": [],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
+      },
+      {
+        "id": 2,
+        "nome": "Togu",
+        "avatar": "data:image/jpeg;base64,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",
+        "cartas": [],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "nome": "asd",
+    "espera": false,
+    "adminId": 1,
+    "baralho": [],
+    "rodada": 0,
+    "usuarios": [
+      {
+        "id": 1,
+        "cartas": [],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "espera": false,
+    "nome": "asd",
+    "baralho": [],
+    "adminId": 1,
+    "rodada": 0,
+    "usuarios": [
+      {
+        "id": 1,
+        "nome": "dsa",
+        "avatar": "qwd",
+        "cartas": [],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "espera": false,
+    "nome": "db[salaIndex]",
+    "adminId": 1,
+    "rodada": 0,
+    "baralho": [],
+    "usuarios": [
+      {
+        "id": 1,
+        "nome": "db[salaIndex]",
+        "avatar": "db[salaIndex]",
+        "cartas": [],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "espera": false,
+    "nome": "guto",
+    "adminId": 1,
+    "rodada": 0,
+    "baralho": [
+      {
+        "id": 5,
+        "carta": "CEO"
+      },
+      {
+        "id": 4,
+        "carta": "RH"
+      },
+      {
+        "id": 3,
+        "carta": "CEO"
+      },
+      {
+        "id": 5,
+        "carta": "Novato"
+      },
+      {
+        "id": 4,
+        "carta": "CEO"
+      },
+      {
+        "id": 2,
+        "carta": "Caixa"
+      },
+      {
+        "id": 6,
+        "carta": "Novato"
+      },
+      {
+        "id": 4,
+        "carta": "Jurídico"
+      },
+      {
+        "id": 2,
+        "carta": "RH"
+      },
+      {
+        "id": 3,
+        "carta": "Caixa"
+      },
+      {
+        "id": 3,
+        "carta": "RH"
+      },
+      {
+        "id": 6,
+        "carta": "Jurídico"
+      },
+      {
+        "id": 1,
+        "carta": "Caixa"
+      },
+      {
+        "id": 5,
+        "carta": "Jurídico"
+      },
+      {
+        "id": 7,
+        "carta": "Novato"
+      }
+    ],
+    "usuarios": [
+      {
+        "id": 1,
+        "nome": "togu",
+        "avatar": "https://image.freepik.com/vetores-gratis/logotipo-do-avatar-pro-gamer_71220-49.jpg",
+        "cartas": [
+          {
+            "id": 5,
+            "carta": "CEO"
+          },
+          {
+            "id": 4,
+            "carta": "RH"
+          }
+        ],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
+      },
+      {
+        "id": 2,
+        "nome": "togu",
+        "avatar": "https://image.freepik.com/vetores-gratis/logotipo-do-avatar-pro-gamer_71220-49.jpg",
+        "cartas": [
+          {
+            "id": 5,
+            "carta": "CEO"
+          },
+          {
+            "id": 4,
+            "carta": "RH"
+          }
+        ],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
+      },
+      {
+        "id": 3,
+        "nome": "togu",
+        "avatar": "https://image.freepik.com/vetores-gratis/logotipo-do-avatar-pro-gamer_71220-49.jpg",
+        "cartas": [
+          {
+            "id": 5,
+            "carta": "CEO"
+          },
+          {
+            "id": 4,
+            "carta": "RH"
+          }
+        ],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "espera": false,
+    "nome": "asdasd",
+    "adminId": 1,
+    "rodada": 0,
+    "baralho": [
+      {
+        "id": 4,
+        "carta": "Jurídico"
+      },
+      {
+        "id": 5,
+        "carta": "Novato"
+      },
+      {
+        "id": 4,
+        "carta": "CEO"
+      },
+      {
+        "id": 5,
+        "carta": "Jurídico"
+      },
+      {
+        "id": 2,
+        "carta": "RH"
+      },
+      {
+        "id": 2,
+        "carta": "Caixa"
+      },
+      {
+        "id": 3,
+        "carta": "CEO"
+      },
+      {
+        "id": 7,
+        "carta": "Novato"
+      },
+      {
+        "id": 3,
+        "carta": "Caixa"
+      },
+      {
+        "id": 5,
+        "carta": "CEO"
+      },
+      {
+        "id": 6,
+        "carta": "Novato"
+      },
+      {
+        "id": 1,
+        "carta": "Caixa"
+      },
+      {
+        "id": 3,
+        "carta": "RH"
+      },
+      {
+        "id": 4,
+        "carta": "RH"
+      },
+      {
+        "id": 6,
+        "carta": "Jurídico"
+      }
+    ],
+    "usuarios": [
+      {
+        "id": 1,
+        "nome": "dasasd",
+        "avatar": "dasdas",
+        "cartas": [
+          {
+            "id": 4,
+            "carta": "Jurídico"
+          },
+          {
+            "id": 5,
+            "carta": "Novato"
+          }
+        ],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
+      },
+      {
+        "id": 2,
+        "nome": "dasasdasd",
+        "avatar": "dasasd",
+        "cartas": [
+          {
+            "id": 4,
+            "carta": "Jurídico"
+          },
+          {
+            "id": 5,
+            "carta": "Novato"
+          }
+        ],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
+      },
+      {
+        "id": 3,
+        "nome": "dasasdasd",
+        "avatar": "dasasd",
+        "cartas": [
+          {
+            "id": 4,
+            "carta": "Jurídico"
+          },
+          {
+            "id": 5,
+            "carta": "Novato"
+          }
+        ],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
+      },
+      {
+        "id": 4,
+        "nome": "dasasdasd",
+        "avatar": "dasasd",
+        "cartas": [
+          {
+            "id": 4,
+            "carta": "Jurídico"
+          },
+          {
+            "id": 5,
+            "carta": "Novato"
+          }
+        ],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
+      },
+      {
+        "id": 5,
+        "nome": "Augustim",
+        "avatar": "asd",
+        "cartas": [
+          {
+            "id": 4,
+            "carta": "Jurídico"
+          },
+          {
+            "id": 5,
+            "carta": "Novato"
+          }
+        ],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
+      }
+    ]
+  }
+]
