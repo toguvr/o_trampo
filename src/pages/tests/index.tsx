@@ -1,8 +1,5 @@
-import { values } from "faunadb";
-import { GetStaticProps } from "next";
 import Head from "next/head";
 import { useState } from "react";
-import { SubscribeButton } from "../components/SubscribeButton";
 import { api } from "../../services/api";
 import styles from "../styles/home.module.scss";
 
@@ -82,7 +79,7 @@ export default function Home({ product }: HomeProps) {
           <button onClick={startRoom}>Iniciar</button>
           <h1>
             News about the <span>React</span> world.
-          </h1>          
+          </h1>
         </section>
         <img src="/images/avatar.svg" alt="Girl coding" />
       </main>
