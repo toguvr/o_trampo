@@ -1,10 +1,7 @@
-import { query as q } from "faunadb";
 import { NextApiRequest, NextApiResponse } from "next";
-import { getSession } from "next-auth/client";
-import { fauna } from "../../services/fauna";
-import { stripe } from "../../services/stripe";
 import fs from "fs";
 import db from "../../../db.json";
+import "./socketio";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {
@@ -26,8 +23,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (!nome_sala || !nome_usuario || !avatar) {
       return res.status(400).json({ message: "Algum dado nao enviado" });
     }
-
-    console.log(salaIndex);
 
     if (salaIndex === -1) {
       const salaId = db.length;
