@@ -8,10 +8,10 @@ const ioHandler = (req, res) => {
     const io = new Server(res.socket.server);
 
     io.on("connection", (socket) => {
-      const { user_id } = socket.handshake.query;
+      // const { user_id } = socket.handshake.query;
 
-      console.log(user_id);
-      connectedUsers[user_id] = socket.id;
+      // console.log(user_id);
+      // connectedUsers[user_id] = socket.id;
 
       socket.broadcast.emit("a user connected");
 
