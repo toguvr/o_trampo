@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@material-ui/icons": "^4.11.2",
     "@prismicio/client": "^4.0.0",
     "@stripe/stripe-js": "^1.13.2",
     "@types/next-auth": "^3.13.0",
