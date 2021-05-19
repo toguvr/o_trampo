@@ -76,7 +76,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       return String(sala.id) === String(sala_id);
     });
 
-    if (salaCorreta.adminId !== user_id) {
+    if (String(salaCorreta.adminId) !== String(user_id)) {
       return res
         .status(401)
         .json({ message: "Apenas o admin pode iniciar a partida" });

@@ -190,6 +190,15 @@
         "duvido": false,
         "passou": false,
         "moedas": 0
+      },
+      {
+        "id": 2,
+        "nome": "asd",
+        "avatar": "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png",
+        "cartas": [],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
       }
     ]
   },
@@ -509,6 +518,264 @@
           {
             "id": 5,
             "carta": "Novato"
+          }
+        ],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "espera": false,
+    "nome": "Testee",
+    "adminId": 1,
+    "rodada": 0,
+    "baralho": [],
+    "usuarios": [
+      {
+        "id": 1,
+        "nome": "Augusto",
+        "avatar": "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png",
+        "cartas": [],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
+      },
+      {
+        "id": 2,
+        "nome": "Augusto",
+        "avatar": "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png",
+        "cartas": [],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "espera": false,
+    "nome": "Guto",
+    "adminId": 1,
+    "rodada": 0,
+    "baralho": [],
+    "usuarios": [
+      {
+        "id": 1,
+        "nome": "Togu",
+        "avatar": "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png",
+        "cartas": [],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "espera": false,
+    "nome": "Sala",
+    "adminId": 1,
+    "rodada": 0,
+    "baralho": [],
+    "usuarios": [
+      {
+        "id": 1,
+        "nome": "Togu",
+        "avatar": "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png",
+        "cartas": [],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
+      },
+      {
+        "id": 2,
+        "nome": "Togu",
+        "avatar": "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png",
+        "cartas": [],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "espera": false,
+    "nome": "ta ata",
+    "adminId": 1,
+    "rodada": 0,
+    "baralho": [],
+    "usuarios": [
+      {
+        "id": 1,
+        "nome": "Togu",
+        "avatar": "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png",
+        "cartas": [],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "espera": false,
+    "nome": "tar das ads",
+    "adminId": 1,
+    "rodada": 0,
+    "baralho": [],
+    "usuarios": [
+      {
+        "id": 1,
+        "nome": "dsa",
+        "avatar": "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png",
+        "cartas": [],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "espera": false,
+    "nome": "da ads ",
+    "adminId": 1,
+    "rodada": 0,
+    "baralho": [],
+    "usuarios": [
+      {
+        "id": 1,
+        "nome": "asd",
+        "avatar": "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png",
+        "cartas": [],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "espera": false,
+    "nome": "sfsdfsdf",
+    "adminId": 1,
+    "rodada": 0,
+    "baralho": [],
+    "usuarios": [
+      {
+        "id": 1,
+        "nome": "fsd",
+        "avatar": "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png",
+        "cartas": [],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "espera": false,
+    "nome": "!@ dasio as DSD",
+    "adminId": 1,
+    "rodada": 1,
+    "baralho": [
+      {
+        "id": 3,
+        "carta": "RH"
+      },
+      {
+        "id": 5,
+        "carta": "CEO"
+      },
+      {
+        "id": 6,
+        "carta": "Jurídico"
+      },
+      {
+        "id": 3,
+        "carta": "Caixa"
+      },
+      {
+        "id": 2,
+        "carta": "RH"
+      },
+      {
+        "id": 7,
+        "carta": "Novato"
+      },
+      {
+        "id": 1,
+        "carta": "Caixa"
+      },
+      {
+        "id": 5,
+        "carta": "Novato"
+      },
+      {
+        "id": 4,
+        "carta": "Jurídico"
+      },
+      {
+        "id": 2,
+        "carta": "Caixa"
+      },
+      {
+        "id": 4,
+        "carta": "RH"
+      },
+      {
+        "id": 4,
+        "carta": "CEO"
+      },
+      {
+        "id": 5,
+        "carta": "Jurídico"
+      },
+      {
+        "id": 3,
+        "carta": "CEO"
+      },
+      {
+        "id": 6,
+        "carta": "Novato"
+      }
+    ],
+    "usuarios": [
+      {
+        "id": 1,
+        "nome": "sda",
+        "avatar": "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png",
+        "cartas": [
+          {
+            "id": 3,
+            "carta": "RH"
+          },
+          {
+            "id": 5,
+            "carta": "CEO"
+          }
+        ],
+        "duvido": false,
+        "passou": false,
+        "moedas": 0
+      },
+      {
+        "id": 2,
+        "nome": "Togu",
+        "avatar": "123",
+        "cartas": [
+          {
+            "id": 3,
+            "carta": "RH"
+          },
+          {
+            "id": 5,
+            "carta": "CEO"
           }
         ],
         "duvido": false,

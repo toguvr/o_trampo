@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import fs from "fs";
 import db from "../../../db.json";
-import "./socketio";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {
@@ -17,7 +16,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const { nome_sala, nome_usuario, avatar } = req.body;
 
     const salaIndex = db.findIndex((sala) => {
-      return sala.nome === nome_sala;
+      return (
+        String(sala.nome).toLowerCase() === String(nome_sala).toLowerCase()
+      );
     });
 
     if (!nome_sala || !nome_usuario || !avatar) {
@@ -25,6 +26,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     if (salaIndex === -1) {
+      console.log("entrei");
+
       const salaId = db.length;
 
       db.push({
@@ -53,28 +56,34 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         }
 
         return res.status(200).json({
-          id: salaId,
-          espera: false,
-          nome: nome_sala,
-          adminId: 1,
-          rodada: 0,
-          baralho: [],
-          usuarios: [
-            {
-              id: 1,
-              nome: nome_usuario,
-              avatar: avatar,
-              cartas: [],
-              duvido: false,
-              passou: false,
-              moedas: 0,
-            },
-          ],
+          sala: {
+            id: salaId,
+            espera: false,
+            nome: nome_sala,
+            adminId: 1,
+            rodada: 0,
+            baralho: [],
+            usuarios: [
+              {
+                id: 1,
+                nome: nome_usuario,
+                avatar: avatar,
+                cartas: [],
+                duvido: false,
+                passou: false,
+                moedas: 0,
+              },
+            ],
+          },
+          user: 1,
         });
       });
-    }
 
-    const numeroDeUsuariosNaSala = db[salaIndex].usuarios.length;
+      return;
+    }
+    console.log("nao entrei");
+
+    const numeroDeUsuariosNaSala = db[salaIndex]?.usuarios?.length;
 
     db[salaIndex].usuarios.push({
       id: numeroDeUsuariosNaSala + 1,
@@ -90,7 +99,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       if (err) {
         return res.send("Erro ao gravar dados.");
       }
-      return res.status(200).json(db[salaIndex]);
+      return res
+        .status(200)
+        .json({ sala: db[salaIndex], user: numeroDeUsuariosNaSala + 1 });
     });
   } else {
     res.setHeader("Allow", "POST");
