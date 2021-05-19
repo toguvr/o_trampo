@@ -6,14 +6,19 @@ import db from "../../db.json";
 import { api } from "../services/api";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import { Room, User } from "../dtos";
+
+interface RoomMe extends Room {
+  me: User;
+}
 
 export default function Sala() {
   const router = useRouter();
-  console.log(router.query);
+
   const sala_id = router.query.sala[0];
   const user_id = router.query.sala[1];
   // const [sala_id, user_id] = router.query.sala;
-  const [room, setRoom] = useState({});
+  const [room, setRoom] = useState({} as RoomMe);
 
   const startGame = async () => {
     try {
