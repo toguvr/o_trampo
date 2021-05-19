@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import fs from "fs";
-import db from "../../../db.json";
+import db from "../../database/db.json";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {

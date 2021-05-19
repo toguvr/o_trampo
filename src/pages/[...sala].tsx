@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Player from "../components/player";
 import styles from "../styles/sala.module.scss";
 import { RiHeartFill, RiMoneyDollarCircleFill } from "react-icons/ri";
-import db from "../../db.json";
+import db from "../database/db.json";
 import { api } from "../services/api";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
