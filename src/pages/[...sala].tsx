@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Player from "../components/player";
 import styles from "../styles/sala.module.scss";
 import { RiHeartFill, RiMoneyDollarCircleFill } from "react-icons/ri";
-import db from "../database/db.json";
 import { api } from "../services/api";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { Room, User } from "../dtos";
-
+import socketio from "socket.io-client";
 interface RoomMe extends Room {
   me: User;
 }
@@ -22,20 +21,29 @@ export default function Sala() {
 
   const startGame = async () => {
     try {
-      const response = await api.post(`/iniciar`, {
+      const response = await api.post(`/sala/iniciar`, {
         sala_id,
         user_id,
       });
 
-      setRoom(response.data);
+      const me = response.data.usuarios.find((usuario) => {
+        return String(usuario.id) === String(user_id);
+      });
+
+      const usuarios = response.data.usuarios.filter((usuario) => {
+        return String(usuario.id) !== String(user_id);
+      });
+
+      setRoom({ ...response.data, me, usuarios });
     } catch (err) {
+      // console.log(err.response.data);
       toast.error(err.response.data.message);
     }
   };
 
   const getRoom = async () => {
     try {
-      const response = await api.get(`/sala?sala_id=${sala_id}`);
+      const response = await api.get(`/sala/${sala_id}`);
 
       const me = response.data.usuarios.find((usuario) => {
         return String(usuario.id) === String(user_id);
@@ -51,16 +59,45 @@ export default function Sala() {
     }
   };
 
+  const socket = useMemo(() => {
+    if (user_id) {
+      return socketio(process.env.NEXT_PUBLIC_API as string, {
+        transports: ["websocket"],
+        query: {
+          user_id,
+        },
+      });
+    }
+  }, [user_id]);
+
+  useEffect(() => {
+    if (sala_id) {
+      socket.emit(`newRoom`, sala_id);
+
+      socket.on(`joinRoom`, () => {
+        getRoom();
+      });
+    }
+  }, [socket]);
+
   useEffect(() => {
     getRoom();
-  }, [db]);
+  }, []);
 
   return (
     <div className={styles.container}>
       <h1>Jogadores :</h1>
       <div className={styles.main}>
         {room?.usuarios?.map((usuario) => {
-          return <Player key={usuario.id} />;
+          return (
+            <Player
+              vidas={usuario.cartas.length}
+              moedas={usuario.moedas}
+              nome={usuario.nome}
+              avatar={usuario.avatar}
+              key={usuario.id}
+            />
+          );
         })}
       </div>
       <div className={styles.movesBoard}>
@@ -94,10 +131,10 @@ export default function Sala() {
               <div className={styles.personaStars}>
                 <RiHeartFill size={25} color={"var(--gray-900)"} />
 
-                <p>5</p>
+                <p>{room.me?.cartas.length}</p>
                 <RiMoneyDollarCircleFill size={25} color={"var(--gray-900)"} />
 
-                <p>2</p>
+                <p>{room.me?.moedas}</p>
               </div>
             </div>
           </div>

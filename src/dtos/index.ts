@@ -1,5 +1,7 @@
 export interface User {
   id: number;
+  nome: string;
+  avatar: string;
   cartas: {
     id: number;
     carta: string;
@@ -20,4 +22,5 @@ export interface Room {
   }[];
   rodada: number;
   usuarios: User[];
+  me: User;
 }
