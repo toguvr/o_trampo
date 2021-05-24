@@ -62,6 +62,42 @@ export default function Sala() {
         {room?.usuarios?.map((usuario) => {
           return <Player key={usuario.id} />;
         })}
+        {/* <img
+          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
+          alt="Avatar"
+        />
+        <img
+          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
+          alt="Avatar"
+        />
+        <img
+          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
+          alt="Avatar"
+        />
+        <img
+          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
+          alt="Avatar"
+        />
+        <img
+          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
+          alt="Avatar"
+        />
+        <img
+          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
+          alt="Avatar"
+        />
+        <img
+          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
+          alt="Avatar"
+        />
+        <img
+          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
+          alt="Avatar"
+        />
+        <img
+          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
+          alt="Avatar"
+        /> */}
       </div>
       <div className={styles.movesBoard}>
         <div className={styles.movesInBoard}>
@@ -81,6 +117,7 @@ export default function Sala() {
               <button>Passar</button>
               <button>Duvidar</button>
             </div>
+              <hr />
           </div>
 
           <div className={styles.movesFooter}>
@@ -107,7 +144,7 @@ export default function Sala() {
           <h1>Extra</h1>
           <h1>Renda</h1>
           <h1>Matar</h1>
-          <hr />
+          {/* <hr /> */}
           <h1>Regra</h1>
           <h1 onClick={startGame}>New</h1>
         </div>
