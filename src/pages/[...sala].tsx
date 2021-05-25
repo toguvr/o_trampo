@@ -40,10 +40,10 @@ export default function Sala() {
   const [doubtActionType, setDoubtActionType] = useState(0);
 
   useEffect(() => {
-    if (room?.me?.cards?.length === 0 && Number(room?.round) !== 0) {
+    if (!room.users.find((usuario) => usuario.id === user_id)) {
       router.push("/");
     }
-  }, [room.me]);
+  }, [room]);
 
   const playAction = (action) => {
     if (
