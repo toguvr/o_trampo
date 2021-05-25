@@ -879,6 +879,42 @@ export default function Sala() {
             />
           );
         })}
+        {/* <img
+          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
+          alt="Avatar"
+        />
+        <img
+          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
+          alt="Avatar"
+        />
+        <img
+          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
+          alt="Avatar"
+        />
+        <img
+          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
+          alt="Avatar"
+        />
+        <img
+          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
+          alt="Avatar"
+        />
+        <img
+          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
+          alt="Avatar"
+        />
+        <img
+          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
+          alt="Avatar"
+        />
+        <img
+          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
+          alt="Avatar"
+        />
+        <img
+          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
+          alt="Avatar"
+        /> */}
       </div>
       <div className={styles.movesBoard}>
         <div className={styles.movesInBoard}>
@@ -903,11 +939,13 @@ export default function Sala() {
           </div>
         </div>
         <div className={styles.movesOutBoard}>
+
           <h1 onClick={() => playAction(1)}>Renda</h1>
           <h1 onClick={() => playAction(2)}>Renda Extra</h1>
           <h1 onClick={() => playAction(3)}>Poder</h1>
           <h1 onClick={() => playAction(4)}>Matar</h1>
           <hr />
+
           <h1>Regra</h1>
           <h1 onClick={startGame}>New</h1>
         </div>

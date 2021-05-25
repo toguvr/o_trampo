@@ -787,121 +787,14 @@
   {
     "id": 14,
     "espera": false,
-    "nome": "12",
-    "adminId": 1,
-    "rodada": 1,
-    "baralho": [
-      {
-        "id": 3,
-        "carta": "Caixa"
-      },
-      {
-        "id": 5,
-        "carta": "Novato"
-      },
-      {
-        "id": 4,
-        "carta": "RH"
-      },
-      {
-        "id": 3,
-        "carta": "RH"
-      },
-      {
-        "id": 6,
-        "carta": "Jurídico"
-      },
-      {
-        "id": 7,
-        "carta": "Novato"
-      },
-      {
-        "id": 5,
-        "carta": "CEO"
-      },
-      {
-        "id": 4,
-        "carta": "CEO"
-      },
-      {
-        "id": 2,
-        "carta": "Caixa"
-      },
-      {
-        "id": 4,
-        "carta": "Jurídico"
-      },
-      {
-        "id": 2,
-        "carta": "RH"
-      },
-      {
-        "id": 5,
-        "carta": "Jurídico"
-      },
-      {
-        "id": 1,
-        "carta": "Caixa"
-      },
-      {
-        "id": 6,
-        "carta": "Novato"
-      },
-      {
-        "id": 3,
-        "carta": "CEO"
-      }
-    ],
-    "usuarios": [
-      {
-        "id": 1,
-        "nome": "gu",
-        "avatar": "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png",
-        "cartas": [
-          {
-            "id": 3,
-            "carta": "Caixa"
-          },
-          {
-            "id": 5,
-            "carta": "Novato"
-          }
-        ],
-        "duvido": false,
-        "passou": false,
-        "moedas": 0
-      },
-      {
-        "id": 2,
-        "nome": "asd",
-        "avatar": "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png",
-        "cartas": [
-          {
-            "id": 3,
-            "carta": "Caixa"
-          },
-          {
-            "id": 5,
-            "carta": "Novato"
-          }
-        ],
-        "duvido": false,
-        "passou": false,
-        "moedas": 0
-      }
-    ]
-  },
-  {
-    "id": 15,
-    "espera": false,
-    "nome": "dois",
+    "nome": "asdasdas",
     "adminId": 1,
     "rodada": 0,
     "baralho": [],
     "usuarios": [
       {
         "id": 1,
-        "nome": "dasd",
+        "nome": "dsasdasd",
         "avatar": "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png",
         "cartas": [],
         "duvido": false,
