@@ -103,8 +103,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     db[salaIndex] = salaCorreta;
 
-    console.log(db);
-
     fs.writeFile("db.json", JSON.stringify(db, null, 2), function (err) {
       if (err) {
         return res.send("Erro ao gravar dados.");
