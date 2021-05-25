@@ -1,14 +1,17 @@
 import Head from "next/head";
 import Router from "next/router";
 import { useState } from "react";
+import Loader from "react-loader-spinner";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
 import styles from "../styles/home.module.scss";
 
 export default function Home() {
   const [values, setValues] = useState({} as { [key: string]: any });
+  const [loading, setLoading] = useState(false);
 
   const enterRoom = async () => {
+    setLoading(true);
     try {
       const response = await api.post("/sala", {
         ...values,
@@ -22,6 +25,8 @@ export default function Home() {
       toast.error(
         err?.response?.data?.message || "Criação dos dados da sala falhou"
       );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -63,7 +68,13 @@ export default function Home() {
           }
           placeholder="Nome da sala"
         ></input>
-        <button onClick={enterRoom}>Entrar</button>
+        <button onClick={enterRoom}>
+          {loading ? (
+            <Loader type="Circles" color="#fff" height={14} width={14} />
+          ) : (
+            "Entrar"
+          )}
+        </button>
       </div>
     </div>
   );

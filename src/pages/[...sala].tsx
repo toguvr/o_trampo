@@ -936,6 +936,11 @@ export default function Sala() {
         getRoom();
       });
 
+      socket.on(`passOnly`, () => {
+        getRoom();
+        loading.start();
+      });
+
       socket.on(`startRoom`, () => {
         getRoom();
         setDoAction(0);
