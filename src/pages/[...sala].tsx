@@ -43,10 +43,6 @@ export default function Sala() {
   const [doubtActionType, setDoubtActionType] = useState(0);
 
   useEffect(() => {
-    console.log("doubtAction", doubtAction);
-  }, [victim, doubtAction]);
-
-  useEffect(() => {
     if (room.id) {
       const inRoom = room?.users.find(
         (usuario) => String(usuario?.id) === String(user_id)
