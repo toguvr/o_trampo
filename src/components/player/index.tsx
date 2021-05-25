@@ -8,6 +8,8 @@ interface PlayerProps {
   moedas: number;
   nome: string;
   avatar: string;
+  answer: boolean;
+  selected: boolean;
 
   onClick(): void;
 }
@@ -18,17 +20,25 @@ export default function Player({
   nome,
   avatar,
   onClick,
+  selected,
+  answer,
 }: PlayerProps) {
   return (
-    <div onClick={onClick} className={styles.card}>
+    <div
+      onClick={onClick}
+      className={`${styles.card} ${selected ? styles.selected : ""}`}
+    >
       <h1>{nome}</h1>
-      <img
-        src={
-          avatar ||
-          "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
-        }
-        alt="Avatar"
-      />
+      <aside>
+        <img
+          src={
+            avatar ||
+            "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
+          }
+          alt="Avatar"
+        />
+        <div className={`${answer ? styles.answer : styles.notAnswer}`}></div>
+      </aside>
       <div className={styles.cardFooter}>
         <RiHeartLine />
         <p>{vidas}</p>

@@ -4,9 +4,11 @@ import "../styles/global.scss";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import AppProvider from "../hooks";
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <AppProvider>
       <Component {...pageProps} />
       <ToastContainer
         position="top-center"
@@ -19,7 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         draggable
         pauseOnHover
       />
-    </>
+    </AppProvider>
   );
 }
 

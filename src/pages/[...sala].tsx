@@ -10,6 +10,7 @@ import socketio from "socket.io-client";
 import { addSeconds } from "date-fns";
 import { useTimer } from "react-timer-hook";
 import { cartas } from "../utils";
+import { useLoading } from "../hooks/load";
 
 interface RoomMe extends Room {
   me: User;
@@ -28,12 +29,13 @@ interface SocketReturnProps {
 
 export default function Sala() {
   const router = useRouter();
-
+  const loading = useLoading();
   const sala_id = router.query.sala[0];
   const user_id = router.query.sala[1];
   // const [sala_id, user_id] = router.query.sala;
   const [room, setRoom] = useState({ users: [] } as RoomMe);
   const [yourAction, setDoAction] = useState(0);
+
   const [play, setPlay] = useState(<div></div>);
   const [victim, setVictim] = useState({} as User);
   const [doubtAction, setDoubtAction] = useState({} as SocketReturnProps);
@@ -87,6 +89,7 @@ export default function Sala() {
   };
 
   const doubtDuque = async (doubt) => {
+    loading.start();
     try {
       const response = await api.post(`/sala/duvido`, {
         sala_id,
@@ -97,10 +100,13 @@ export default function Sala() {
       setDoAction(6);
     } catch (err) {
       toast.warning(err?.response?.data?.message || "Não foi possível duvidar");
+    } finally {
+      loading.stop();
     }
   };
 
   const doubtDuqueAction = async (doubt) => {
+    loading.start();
     try {
       const response = await api.post(`/sala/duvido/poder/duque`, {
         sala_id,
@@ -112,10 +118,14 @@ export default function Sala() {
       setDoAction(6);
     } catch (err) {
       toast.warning(err?.response?.data?.message || "Não foi possível duvidar");
+    } finally {
+      loading.stop();
     }
   };
 
   const doubtFirstCaptainAction = async (doubtType) => {
+    loading.start();
+
     try {
       const response = await api.post(`/sala/duvido/poder/capitao`, {
         sala_id,
@@ -128,10 +138,14 @@ export default function Sala() {
       setDoAction(6);
     } catch (err) {
       toast.warning(err?.response?.data?.message || "Não foi possível duvidar");
+    } finally {
+      loading.stop();
     }
   };
 
   const doubtFirstAssassinAction = async (doubtType) => {
+    loading.start();
+
     try {
       const response = await api.post(`/sala/duvido/poder/assassino`, {
         sala_id,
@@ -144,10 +158,14 @@ export default function Sala() {
       setDoAction(6);
     } catch (err) {
       toast.warning(err?.response?.data?.message || "Não foi possível duvidar");
+    } finally {
+      loading.stop();
     }
   };
 
   const doubtFirstEmbaixadorAction = async (doubtType) => {
+    loading.start();
+
     try {
       const response = await api.post(`/sala/duvido/poder/embaixador`, {
         sala_id,
@@ -160,10 +178,13 @@ export default function Sala() {
       setDoAction(6);
     } catch (err) {
       toast.warning(err?.response?.data?.message || "Não foi possível duvidar");
+    } finally {
+      loading.stop();
     }
   };
 
   const doubtSecondCaptainAction = async (doubtType) => {
+    loading.start();
     try {
       const response = await api.post(`/sala/duvido/poder/capitao`, {
         sala_id,
@@ -176,10 +197,13 @@ export default function Sala() {
       setDoAction(6);
     } catch (err) {
       toast.warning(err?.response?.data?.message || "Não foi possível duvidar");
+    } finally {
+      loading.stop();
     }
   };
 
   const doubtSecondAssassinAction = async (doubtType) => {
+    loading.start();
     try {
       const response = await api.post(`/sala/duvido/poder/assassino`, {
         sala_id,
@@ -192,6 +216,8 @@ export default function Sala() {
       setDoAction(6);
     } catch (err) {
       toast.warning(err?.response?.data?.message || "Não foi possível duvidar");
+    } finally {
+      loading.stop();
     }
   };
 
@@ -219,6 +245,7 @@ export default function Sala() {
       );
     }
     try {
+      loading.start();
       const response = await api.post(`/sala/acao-duvido-start`, {
         sala_id,
         user_id,
@@ -227,7 +254,10 @@ export default function Sala() {
         victim,
       });
       setDoAction(6);
-    } catch (err) {}
+    } catch (err) {
+    } finally {
+      loading.stop();
+    }
   };
 
   const startTimeActionBlock = async (action, doubtActionType) => {
@@ -375,11 +405,56 @@ export default function Sala() {
             <h1>Jogada :</h1>
             <div className={styles.movesContent}>
               <div className={styles.movesTop}>
-                <h1 onClick={() => setDoubtActionType(0)}>Duque</h1>
-                <h1 onClick={() => setDoubtActionType(1)}>Capitão</h1>
-                <h1 onClick={() => setDoubtActionType(2)}>Assassino</h1>
-                <h1 onClick={() => setDoubtActionType(3)}>Condessa</h1>
-                <h1 onClick={() => setDoubtActionType(4)}>Embaixador</h1>
+                <h1
+                  className={
+                    Number(doubtActionType) === 0
+                      ? styles.selected
+                      : styles.notSelected
+                  }
+                  onClick={() => setDoubtActionType(0)}
+                >
+                  Duque
+                </h1>
+                <h1
+                  className={
+                    Number(doubtActionType) === 1
+                      ? styles.selected
+                      : styles.notSelected
+                  }
+                  onClick={() => setDoubtActionType(1)}
+                >
+                  Capitão
+                </h1>
+                <h1
+                  className={
+                    Number(doubtActionType) === 2
+                      ? styles.selected
+                      : styles.notSelected
+                  }
+                  onClick={() => setDoubtActionType(2)}
+                >
+                  Assassino
+                </h1>
+                <h1
+                  className={
+                    Number(doubtActionType) === 3
+                      ? styles.selected
+                      : styles.notSelected
+                  }
+                  onClick={() => setDoubtActionType(3)}
+                >
+                  Condessa
+                </h1>
+                <h1
+                  className={
+                    Number(doubtActionType) === 4
+                      ? styles.selected
+                      : styles.notSelected
+                  }
+                  onClick={() => setDoubtActionType(4)}
+                >
+                  Embaixador
+                </h1>
               </div>
               {influencerPlays}
             </div>
@@ -764,6 +839,8 @@ export default function Sala() {
   }, [yourAction, room.round, victim?.id, doubtAction, doubtActionType]);
 
   const startGame = async () => {
+    loading.start();
+
     try {
       const response = await api.post(`/sala/iniciar`, {
         sala_id,
@@ -784,6 +861,8 @@ export default function Sala() {
     } catch (err) {
       // console.log(err.response.data);
       toast.error(err?.response?.data?.message || "Start da sala falhou");
+    } finally {
+      loading.stop();
     }
   };
 
@@ -817,6 +896,8 @@ export default function Sala() {
   };
 
   const getRoom = async () => {
+    loading.start();
+
     try {
       const response = await api.get(`/sala/${sala_id}`);
 
@@ -829,7 +910,10 @@ export default function Sala() {
       });
 
       setRoom({ ...response.data, me, opponents });
-    } catch (err) {}
+    } catch (err) {
+    } finally {
+      loading.stop();
+    }
   };
 
   const socket = useMemo(() => {
@@ -902,6 +986,8 @@ export default function Sala() {
         {room?.opponents?.map((user) => {
           return (
             <Player
+              answer={user.pass || user.doubt}
+              selected={user.id === victim.id}
               onClick={() => setVictim(user)}
               vidas={user.cards.length}
               moedas={user.coins}
@@ -935,12 +1021,42 @@ export default function Sala() {
           </div>
         </div>
         <div className={styles.movesOutBoard}>
-          <h1 onClick={() => playAction(1)}>Renda</h1>
-          <h1 onClick={() => playAction(2)}>Renda Extra</h1>
-          <h1 onClick={() => playAction(3)}>Poder</h1>
-          <h1 onClick={() => playAction(4)}>Matar</h1>
-          <h1>Regra</h1>
-          <h1 onClick={startGame}>New</h1>
+          <h1
+            className={
+              Number(yourAction) === 1 ? styles.selected : styles.notSelected
+            }
+            onClick={() => playAction(1)}
+          >
+            Renda
+          </h1>
+          <h1
+            className={
+              Number(yourAction) === 2 ? styles.selected : styles.notSelected
+            }
+            onClick={() => playAction(2)}
+          >
+            Renda Extra
+          </h1>
+          <h1
+            className={
+              Number(yourAction) === 3 ? styles.selected : styles.notSelected
+            }
+            onClick={() => playAction(3)}
+          >
+            Poder
+          </h1>
+          <h1
+            className={
+              Number(yourAction) === 4 ? styles.selected : styles.notSelected
+            }
+            onClick={() => playAction(4)}
+          >
+            Matar
+          </h1>
+          <h1 className={styles.notSelected}>Regra</h1>
+          <h1 className={styles.notSelected} onClick={startGame}>
+            New
+          </h1>
         </div>
       </div>
     </div>
