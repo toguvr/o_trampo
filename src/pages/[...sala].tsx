@@ -51,6 +51,12 @@ export default function Sala() {
     }
   }, [room]);
 
+  useEffect(() => {
+    if (room.round) {
+      setVictim({} as User);
+    }
+  }, [room?.round]);
+
   const playAction = (action) => {
     if (
       String(room?.users[Number(Number(room.round) - 1)]?.id) ===
@@ -101,7 +107,7 @@ export default function Sala() {
         user_id,
         victim_id: doubtAction?.user_id,
         doubt,
-        doubtActionType,
+        doubtActionType: doubtAction?.doubtActionType,
       });
       setDoAction(6);
     } catch (err) {
@@ -116,7 +122,7 @@ export default function Sala() {
         user_id,
         victim_id: doubtAction?.victim.id,
         doubtType,
-        doubtActionType,
+        doubtActionType: doubtAction?.doubtActionType,
       });
 
       setDoAction(6);
@@ -132,7 +138,7 @@ export default function Sala() {
         user_id,
         victim_id: doubtAction?.victim.id,
         doubtType,
-        doubtActionType,
+        doubtActionType: doubtAction?.doubtActionType,
       });
 
       setDoAction(6);
@@ -148,7 +154,7 @@ export default function Sala() {
         user_id,
         victim_id: null,
         doubtType,
-        doubtActionType,
+        doubtActionType: doubtAction?.doubtActionType,
       });
 
       setDoAction(6);
@@ -164,7 +170,7 @@ export default function Sala() {
         user_id,
         victim_id: doubtAction?.user.id,
         doubtType,
-        doubtActionType,
+        doubtActionType: doubtAction?.doubtActionType,
       });
 
       setDoAction(6);
@@ -180,7 +186,7 @@ export default function Sala() {
         user_id,
         victim_id: doubtAction?.victim?.id,
         doubtType,
-        doubtActionType,
+        doubtActionType: doubtAction?.doubtActionType,
       });
 
       setDoAction(6);
@@ -352,7 +358,8 @@ export default function Sala() {
             <h1>Jogada :</h1>
             <div className={styles.movesContent}>
               <strong>
-                <b>Renda</b>: Pegue 2 moedas (Pode ser bloqueado pelo duque).
+                <b>Renda Extra</b>: Pegue 2 moedas (Pode ser bloqueado pelo
+                duque).
               </strong>
               <div className={styles.movesBottom}>
                 <button onClick={() => startTimeAction(2, null)}>
@@ -447,9 +454,10 @@ export default function Sala() {
                     {String(
                       room?.users[Number(Number(room.round) - 1)]?.username
                     )}{" "}
-                    fez a jogada "Poder", dizendo ser {cartas[doubtActionType]},
-                    gostaria de duvidar que ele tem esta carta?. (Se ele
-                    realmente for {cartas[doubtActionType]}, você perde uma vida
+                    fez a jogada "Poder", dizendo ser{" "}
+                    {cartas[doubtAction?.doubtActionType]}, gostaria de duvidar
+                    que ele tem esta carta?. (Se ele realmente for{" "}
+                    {cartas[doubtAction?.doubtActionType]}, você perde uma vida
                     e uma carta, se não, ele perde uma vida e uma carta.)
                   </strong>
 
