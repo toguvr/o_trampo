@@ -11,6 +11,7 @@ import { addSeconds } from "date-fns";
 import { useTimer } from "react-timer-hook";
 import { cartas } from "../utils";
 import { useLoading } from "../hooks/load";
+import Head from "next/head";
 
 interface RoomMe extends Room {
   me: User;
@@ -981,6 +982,10 @@ export default function Sala() {
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>A Corte | Sala {room?.name}</title>
+        <meta name="description" content="login a corte" />
+      </Head>
       <h1>Jogadores :</h1>
       <div className={styles.main}>
         {room?.opponents?.map((user) => {
