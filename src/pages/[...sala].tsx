@@ -40,7 +40,11 @@ export default function Sala() {
   const [doubtActionType, setDoubtActionType] = useState(0);
 
   useEffect(() => {
-    if (!room.users.find((usuario) => usuario.id === user_id)) {
+    const inRoom = room?.users.find(
+      (usuario) => String(usuario?.id) === String(user_id)
+    );
+
+    if (!inRoom) {
       router.push("/");
     }
   }, [room]);
