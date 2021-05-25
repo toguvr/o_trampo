@@ -83,7 +83,7 @@
     margin-top: 8px;
     width: calc(100% - 68px);
     height: 100%;
-    border: 1px solid #000000;
+
     box-sizing: border-box;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 0px 30px 0 0;
@@ -272,4 +272,12 @@
 
 .notSelected {
   border: 2px solid #000000;
+}
+
+.myRound {
+  border: 1px solid #4bd229;
+}
+
+.notMyRound {
+  border: 1px solid #000000;
 }

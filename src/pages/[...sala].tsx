@@ -43,6 +43,10 @@ export default function Sala() {
   const [doubtActionType, setDoubtActionType] = useState(0);
 
   useEffect(() => {
+    console.log("doubtAction", doubtAction);
+  }, [victim, doubtAction]);
+
+  useEffect(() => {
     if (room.id) {
       const inRoom = room?.users.find(
         (usuario) => String(usuario?.id) === String(user_id)
@@ -57,6 +61,8 @@ export default function Sala() {
   useEffect(() => {
     if (room.round) {
       setVictim({} as User);
+      setDoAction(0);
+      setDoubtAction({} as SocketReturnProps);
     }
   }, [room?.round]);
 
@@ -151,7 +157,7 @@ export default function Sala() {
       const response = await api.post(`/sala/duvido/poder/assassino`, {
         sala_id,
         user_id,
-        victim_id: doubtAction?.victim.id,
+        victim_id: doubtAction?.victim?.id,
         doubtType,
         doubtActionType: doubtAction?.doubtActionType,
       });
@@ -205,6 +211,7 @@ export default function Sala() {
 
   const doubtSecondAssassinAction = async (doubtType) => {
     loading.start();
+
     try {
       const response = await api.post(`/sala/duvido/poder/assassino`, {
         sala_id,
@@ -268,7 +275,7 @@ export default function Sala() {
         user_id,
         action,
         doubtActionType,
-        victim,
+        victim: doubtAction?.victim,
       });
       setDoAction(6);
     } catch (err) {}
@@ -562,10 +569,11 @@ export default function Sala() {
                     fez a jogada "Poder", dizendo ser{" "}
                     {cartas[doubtAction?.doubtActionType]} e pegará 2 moedas de{" "}
                     {doubtAction?.victim?.username}. Você pode duvidar que ele
-                    seja {cartas[doubtAction?.doubtActionType]} ou dizer que
-                    você tem {cartas[1]} ou {cartas[4]} para bloquear a ação
-                    dele. (Se um duvidar do outro, quem mentir perde uma vida e
-                    uma carta).
+                    seja {cartas[doubtAction?.doubtActionType]}{" "}
+                    {String(doubtAction?.victim?.id) === String(user_id) &&
+                      " ou dizer que você tem {cartas[1]} ou {cartas[4]} para bloquear a ação dele"}
+                    . (Se um duvidar do outro, quem mentir perde uma vida e uma
+                    carta).
                   </strong>
 
                   <div className={styles.movesBottom}>
@@ -575,9 +583,11 @@ export default function Sala() {
                     <button onClick={() => doubtFirstCaptainAction("doubt")}>
                       Duvidar
                     </button>
-                    <button onClick={() => startTimeActionBlock(3, 12)}>
-                      Bloquear
-                    </button>
+                    {String(doubtAction?.victim?.id) === String(user_id) && (
+                      <button onClick={() => startTimeActionBlock(3, 12)}>
+                        Bloquear
+                      </button>
+                    )}
                   </div>
                 </div>
               </>
@@ -857,10 +867,7 @@ export default function Sala() {
       });
 
       setRoom({ ...response.data, me, opponents });
-      setDoAction(0);
-      setVictim({} as User);
     } catch (err) {
-      // console.log(err.response.data);
       toast.error(err?.response?.data?.message || "Start da sala falhou");
     } finally {
       loading.stop();
@@ -888,10 +895,7 @@ export default function Sala() {
       });
 
       setRoom({ ...response.data, me, opponents });
-      setVictim({} as User);
-      setDoAction(0);
     } catch (err) {
-      // console.log(err.response.data);
       toast.error(err?.response?.data?.message || "Start da sala falhou");
     }
   };
@@ -938,27 +942,26 @@ export default function Sala() {
 
       socket.on(`passOnly`, () => {
         getRoom();
-        loading.start();
       });
 
       socket.on(`startRoom`, () => {
         getRoom();
-        setDoAction(0);
-        setDoubtAction({} as SocketReturnProps);
-        setVictim({} as User);
       });
 
       socket.on(`actionDoubt`, (msg) => {
+        getRoom();
         setDoAction(5);
         setDoubtAction(msg);
       });
 
       socket.on(`actionDoubtBlock`, (msg) => {
+        getRoom();
         setDoAction(8);
         setDoubtAction(msg);
       });
 
       socket.on(`2DoubtDuque`, (msg) => {
+        getRoom();
         setDoAction(7);
         setDoubtAction(msg);
       });
@@ -966,13 +969,11 @@ export default function Sala() {
       socket.on(`actionDid`, () => {
         getRoom();
         setDoAction(0);
-        setDoubtAction({} as SocketReturnProps);
       });
 
       socket.on(`passRound`, () => {
         getRoom();
         setDoAction(0);
-        setDoubtAction({} as SocketReturnProps);
       });
 
       socket.on(`AnyleaveRoom`, () => {
@@ -996,6 +997,10 @@ export default function Sala() {
         {room?.opponents?.map((user) => {
           return (
             <Player
+              myRound={
+                String(room?.users[Number(room?.round) - 1]?.id) ===
+                String(user.id)
+              }
               answer={user.pass || user.doubt}
               selected={user.id === victim.id}
               onClick={() => setVictim(user)}
@@ -1009,7 +1014,13 @@ export default function Sala() {
         })}
       </div>
       <div className={styles.movesBoard}>
-        <div className={styles.movesInBoard}>
+        <div
+          className={`${styles.movesInBoard} ${
+            String(room?.users[Number(room?.round) - 1]?.id) === String(user_id)
+              ? styles.myRound
+              : styles.notMyRound
+          }`}
+        >
           {play}
           <div className={styles.movesFooter}>
             <h2>Seus dados:</h2>

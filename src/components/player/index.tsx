@@ -10,6 +10,7 @@ interface PlayerProps {
   avatar: string;
   answer: boolean;
   selected: boolean;
+  myRound: boolean;
 
   onClick(): void;
 }
@@ -22,6 +23,7 @@ export default function Player({
   onClick,
   selected,
   answer,
+  myRound,
 }: PlayerProps) {
   return (
     <div
@@ -31,6 +33,7 @@ export default function Player({
       <h1>{nome}</h1>
       <aside>
         <img
+          className={myRound ? styles.myRound : styles.notMyRound}
           src={
             avatar ||
             "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
