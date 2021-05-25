@@ -10,8 +10,20 @@ import socketio from "socket.io-client";
 import { addSeconds } from "date-fns";
 import { useTimer } from "react-timer-hook";
 import { cartas } from "../utils";
+
 interface RoomMe extends Room {
   me: User;
+  opponents: User[];
+}
+
+interface SocketReturnProps {
+  sala_id: string;
+  user_id: string;
+  action: number;
+  doubtActionType: number;
+  victim: User;
+  user?: User;
+  username?: string;
 }
 
 export default function Sala() {
@@ -22,10 +34,16 @@ export default function Sala() {
   // const [sala_id, user_id] = router.query.sala;
   const [room, setRoom] = useState({ users: [] } as RoomMe);
   const [yourAction, setDoAction] = useState(0);
-  const [play, setPlay] = useState();
-  const [victim, setVictim] = useState();
-  const [doubtAction, setDoubtAction] = useState();
+  const [play, setPlay] = useState(<div></div>);
+  const [victim, setVictim] = useState({} as User);
+  const [doubtAction, setDoubtAction] = useState({} as SocketReturnProps);
   const [doubtActionType, setDoubtActionType] = useState(0);
+
+  useEffect(() => {
+    if (room?.me?.cards?.length === 0) {
+      router.push("/");
+    }
+  }, [room.me]);
 
   const playAction = (action) => {
     if (
@@ -33,7 +51,7 @@ export default function Sala() {
       String(user_id)
     ) {
       setDoAction(action);
-      setVictim({});
+      setVictim({} as User);
     } else {
       if (Number(room.round) === 0) {
         return toast.warning("O Dono precisa iniciar o jogo.");
@@ -344,11 +362,11 @@ export default function Sala() {
             <h1>Jogada :</h1>
             <div className={styles.movesContent}>
               <div className={styles.movesTop}>
-                <h1 onClick={() => setDoubtActionType(0, null)}>Duque</h1>
-                <h1 onClick={() => setDoubtActionType(1, null)}>Capitão</h1>
-                <h1 onClick={() => setDoubtActionType(2, null)}>Assassino</h1>
-                <h1 onClick={() => setDoubtActionType(3, null)}>Condessa</h1>
-                <h1 onClick={() => setDoubtActionType(4, null)}>Embaixador</h1>
+                <h1 onClick={() => setDoubtActionType(0)}>Duque</h1>
+                <h1 onClick={() => setDoubtActionType(1)}>Capitão</h1>
+                <h1 onClick={() => setDoubtActionType(2)}>Assassino</h1>
+                <h1 onClick={() => setDoubtActionType(3)}>Condessa</h1>
+                <h1 onClick={() => setDoubtActionType(4)}>Embaixador</h1>
               </div>
               {influencerPlays}
             </div>
@@ -651,7 +669,7 @@ export default function Sala() {
             </>
           );
         }
-        console.log();
+
         if (Number(doubtAction?.doubtActionType) === 22) {
           if (
             String(room?.users[Number(Number(room.round) - 1)]?.id) ===
@@ -748,7 +766,7 @@ export default function Sala() {
 
       setRoom({ ...response.data, me, opponents });
       setDoAction(0);
-      setVictim("");
+      setVictim({} as User);
     } catch (err) {
       // console.log(err.response.data);
       toast.error(err?.response?.data?.message || "Start da sala falhou");
@@ -776,7 +794,7 @@ export default function Sala() {
       });
 
       setRoom({ ...response.data, me, opponents });
-      setVictim("");
+      setVictim({} as User);
       setDoAction(0);
     } catch (err) {
       // console.log(err.response.data);
@@ -822,8 +840,8 @@ export default function Sala() {
       socket.on(`startRoom`, () => {
         getRoom();
         setDoAction(0);
-        setDoubtAction({});
-        setVictim({});
+        setDoubtAction({} as SocketReturnProps);
+        setVictim({} as User);
       });
 
       socket.on(`actionDoubt`, (msg) => {
@@ -844,13 +862,13 @@ export default function Sala() {
       socket.on(`actionDid`, () => {
         getRoom();
         setDoAction(0);
-        setDoubtAction({});
+        setDoubtAction({} as SocketReturnProps);
       });
 
       socket.on(`passRound`, () => {
         getRoom();
         setDoAction(0);
-        setDoubtAction({});
+        setDoubtAction({} as SocketReturnProps);
       });
 
       socket.on(`AnyleaveRoom`, () => {
@@ -879,42 +897,6 @@ export default function Sala() {
             />
           );
         })}
-        {/* <img
-          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
-          alt="Avatar"
-        />
-        <img
-          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
-          alt="Avatar"
-        />
-        <img
-          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
-          alt="Avatar"
-        />
-        <img
-          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
-          alt="Avatar"
-        />
-        <img
-          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
-          alt="Avatar"
-        />
-        <img
-          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
-          alt="Avatar"
-        />
-        <img
-          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
-          alt="Avatar"
-        />
-        <img
-          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
-          alt="Avatar"
-        />
-        <img
-          src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
-          alt="Avatar"
-        /> */}
       </div>
       <div className={styles.movesBoard}>
         <div className={styles.movesInBoard}>
@@ -939,13 +921,10 @@ export default function Sala() {
           </div>
         </div>
         <div className={styles.movesOutBoard}>
-
           <h1 onClick={() => playAction(1)}>Renda</h1>
           <h1 onClick={() => playAction(2)}>Renda Extra</h1>
           <h1 onClick={() => playAction(3)}>Poder</h1>
           <h1 onClick={() => playAction(4)}>Matar</h1>
-          <hr />
-
           <h1>Regra</h1>
           <h1 onClick={startGame}>New</h1>
         </div>
