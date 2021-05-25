@@ -1,26 +1,32 @@
+export interface UserCards {
+  id: number;
+  name: string;
+  user_id: string;
+  user: User;
+}
 export interface User {
   id: number;
-  nome: string;
+  username: string;
   avatar: string;
-  cartas: {
-    id: number;
-    carta: string;
-  }[];
-  duvido: boolean;
-  passou: boolean;
-  moedas: number;
+  cards: UserCards[];
+  doubt: boolean;
+  pass: boolean;
+  coins: number;
+  room: Room;
+}
+export interface Card {
+  id: number;
+  name: string;
+  room_id: string;
+  room: Room;
 }
 
 export interface Room {
   id: number;
-  nome: string;
-  espera: boolean;
-  adminId: number;
-  baralho: {
-    id: number;
-    carta: string;
-  }[];
-  rodada: number;
-  usuarios: User[];
+  name: string;
+  waiting: boolean;
+  cards: Card[];
+  round: number;
+  users: User[];
   me: User;
 }

@@ -1,17 +1,26 @@
 import styles from "../../styles/player.module.scss";
 
 import { RiHeartLine, RiMoneyDollarCircleLine } from "react-icons/ri";
+import { User } from "../../dtos";
 
 interface PlayerProps {
   vidas: number;
   moedas: number;
   nome: string;
   avatar: string;
+
+  onClick(): void;
 }
 
-export default function Player({ vidas, moedas, nome, avatar }: PlayerProps) {
+export default function Player({
+  vidas,
+  moedas,
+  nome,
+  avatar,
+  onClick,
+}: PlayerProps) {
   return (
-    <div className={styles.card}>
+    <div onClick={onClick} className={styles.card}>
       <h1>{nome}</h1>
       <img
         src={

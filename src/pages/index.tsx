@@ -16,9 +16,11 @@ export default function Home() {
           "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png",
       });
 
-      Router.push(`/${response.data.sala.id}/${response.data.user}`);
+      Router.push(`/${response.data.room.id}/${response.data.user.id}`);
     } catch (err) {
-      toast.error(err.response.data.message);
+      toast.error(
+        err?.response?.data?.message || "Criação dos dados da sala falhou"
+      );
     }
   };
 
@@ -31,7 +33,7 @@ export default function Home() {
         />
         <label>Avatar URL</label>
         <input
-          value={values.avatar}
+          value={values?.avatar}
           name="avatar"
           placeholder="Avatar"
           onChange={(e) =>
@@ -40,7 +42,7 @@ export default function Home() {
         ></input>
         <label>Nome de usuário</label>
         <input
-          value={values.nome_usuario}
+          value={values?.nome_usuario}
           name="nome_usuario"
           onChange={(e) =>
             setValues({ ...values, [e.target.name]: e.target.value })
@@ -49,7 +51,7 @@ export default function Home() {
         ></input>
         <label>Nome da sala</label>
         <input
-          value={values.nome_sala}
+          value={values?.nome_sala}
           name="nome_sala"
           onChange={(e) =>
             setValues({ ...values, [e.target.name]: e.target.value })
