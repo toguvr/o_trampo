@@ -50,6 +50,7 @@ export default function Sala() {
       );
 
       if (!inRoom) {
+        toast.error("Você foi eliminado.");
         router.push("/");
       }
     }
