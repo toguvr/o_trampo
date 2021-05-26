@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import Player from "../components/player";
 import styles from "../styles/sala.module.scss";
 import { RiHeartFill, RiMoneyDollarCircleFill } from "react-icons/ri";
+import { CgLogOut } from "react-icons/cg";
 import { api } from "../services/api";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
@@ -567,7 +568,7 @@ export default function Sala() {
                     {doubtAction?.victim?.username}. Você pode duvidar que ele
                     seja {cartas[doubtAction?.doubtActionType]}{" "}
                     {String(doubtAction?.victim?.id) === String(user_id) &&
-                      " ou dizer que você tem {cartas[1]} ou {cartas[4]} para bloquear a ação dele"}
+                      ` ou dizer que você tem ${cartas[1]} ou ${cartas[4]} para bloquear a ação dele`}
                     . (Se um duvidar do outro, quem mentir perde uma vida e uma
                     carta).
                   </strong>
@@ -988,7 +989,13 @@ export default function Sala() {
         <title>A Corte | Sala {room?.name}</title>
         <meta name="description" content="login a corte" />
       </Head>
-      <h1>Jogadores :</h1>
+      <div className={styles.roomHeader}>
+        <h1>Jogadores :</h1>
+        <button onClick={() => router.push("/")}>
+          <CgLogOut size={28} color="#c92828" cursor="pointer" />
+          Sair
+        </button>
+      </div>
       <div className={styles.main}>
         {room?.opponents?.map((user) => {
           return (

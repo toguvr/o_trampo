@@ -1,3 +1,30 @@
+.roomHeader {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+
+  > button {
+    background: var(--gray-900);
+    border: 2px solid #000000;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    width: 80px;
+    height: 51px;
+    color: var(--white);
+    margin-right: 27px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+
+    > svg {
+      margin-right: 4px;
+    }
+  }
+}
+
 .container {
   background: var(--gray-700);
   width: 100%;
@@ -40,6 +67,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 12px;
+  overflow-y: scroll;
 
   @media (min-width: 720px) {
     gap: 40px;
@@ -126,7 +154,7 @@
           width: 50px;
           height: 50px;
           border-radius: 50%;
-
+          cursor: pointer;
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
           font-family: Roboto;
           font-size: 12px;
@@ -240,7 +268,7 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-
+      cursor: pointer;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       font-family: Roboto;
       font-size: 12px;
