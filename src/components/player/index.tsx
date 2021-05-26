@@ -11,6 +11,7 @@ interface PlayerProps {
   answer: boolean;
   selected: boolean;
   myRound: boolean;
+  me?: boolean;
 
   onClick(): void;
 }
@@ -24,13 +25,16 @@ export default function Player({
   selected,
   answer,
   myRound,
+  me,
 }: PlayerProps) {
   return (
     <div
       onClick={onClick}
-      className={`${styles.card} ${selected ? styles.selected : ""}`}
+      className={`${styles.card} ${selected ? styles.selected : ""} ${
+        me ? styles.meBorder : ""
+      }`}
     >
-      <h1>{nome}</h1>
+      <h1 className={`${me ? styles.me : ""}`}>{nome}</h1>
       <aside>
         <img
           className={myRound ? styles.myRound : styles.notMyRound}

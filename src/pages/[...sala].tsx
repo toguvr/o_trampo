@@ -994,6 +994,23 @@ export default function Sala() {
         </button>
       </div>
       <div className={styles.main}>
+        {room.me && (
+          <Player
+            myRound={
+              String(room?.users[Number(room?.round) - 1]?.id) ===
+              String(room.me.id)
+            }
+            answer={room.me.pass || room.me.doubt}
+            selected={false}
+            onClick={() => {}}
+            vidas={room.me.cards.length}
+            moedas={room.me.coins}
+            nome={room.me.username}
+            me
+            avatar={room.me.avatar}
+            key={room.me.id}
+          />
+        )}
         {room?.opponents?.map((user) => {
           return (
             <Player
@@ -1023,7 +1040,7 @@ export default function Sala() {
         >
           {play}
           <div className={styles.movesFooter}>
-            <h2>Seus dados:</h2>
+            <h2>Seus dados: {room?.me?.username}</h2>
             <div className={styles.datas}>
               <div className={styles.personalData}>
                 {room?.me?.cards?.map((card) => {

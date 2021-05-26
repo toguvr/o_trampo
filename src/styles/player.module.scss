@@ -10,6 +10,11 @@
   padding: 7px 3px 5px 3px;
   position: relative;
 
+  .me {
+    color: var(--blue);
+    font-weight: bold;
+  }
+
   h1 {
     font-family: Roboto;
     font-size: 12px;
@@ -83,4 +88,8 @@
 
 .selected {
   border: 2px solid var(--orange);
+}
+
+.meBorder {
+  border: 2px solid var(--blue);
 }

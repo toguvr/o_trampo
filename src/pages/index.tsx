@@ -57,6 +57,7 @@ export default function Home() {
         <input
           value={values?.nome_usuario}
           name="nome_usuario"
+          maxLength={10}
           onChange={(e) =>
             setValues({ ...values, [e.target.name]: e.target.value })
           }
