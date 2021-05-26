@@ -61,7 +61,7 @@ export default function Sala() {
       setDoAction(0);
       setDoubtAction({} as SocketReturnProps);
     }
-  }, [room?.round]);
+  }, [room?.round, room?.users?.length]);
 
   const playAction = (action) => {
     if (
