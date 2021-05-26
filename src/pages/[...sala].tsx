@@ -534,11 +534,11 @@ export default function Sala() {
                     {String(
                       room?.users[Number(Number(room.round) - 1)]?.username
                     )}{" "}
-                    fez a jogada "Poder", dizendo ser{" "}
-                    {cartas[doubtAction?.doubtActionType]}, gostaria de duvidar
-                    que ele tem esta carta?. (Se ele realmente for{" "}
-                    {cartas[doubtAction?.doubtActionType]}, você perde uma vida
-                    e uma carta, se não, ele perde uma vida e uma carta.)
+                    fez a jogada {cartas[doubtAction?.doubtActionType]},
+                    gostaria de duvidar que ele tem esta carta?. (Se ele
+                    realmente for {cartas[doubtAction?.doubtActionType]}, você
+                    perde uma vida e uma carta, se não, ele perde uma vida e uma
+                    carta.)
                   </strong>
 
                   <div className={styles.movesBottom}>
@@ -563,10 +563,9 @@ export default function Sala() {
                     {String(
                       room?.users[Number(Number(room.round) - 1)]?.username
                     )}{" "}
-                    fez a jogada "Poder", dizendo ser{" "}
-                    {cartas[doubtAction?.doubtActionType]} e pegará 2 moedas de{" "}
-                    {doubtAction?.victim?.username}. Você pode duvidar que ele
-                    seja {cartas[doubtAction?.doubtActionType]}{" "}
+                    fez a jogada {cartas[doubtAction?.doubtActionType]} e pegará
+                    2 moedas de {doubtAction?.victim?.username}. Você pode
+                    duvidar que ele seja {cartas[doubtAction?.doubtActionType]}{" "}
                     {String(doubtAction?.victim?.id) === String(user_id) &&
                       ` ou dizer que você tem ${cartas[1]} ou ${cartas[4]} para bloquear a ação dele`}
                     . (Se um duvidar do outro, quem mentir perde uma vida e uma
@@ -600,9 +599,8 @@ export default function Sala() {
                     {String(
                       room?.users[Number(Number(room.round) - 1)]?.username
                     )}{" "}
-                    fez a jogada "Poder", dizendo ser{" "}
-                    {cartas[doubtAction?.doubtActionType]} e pagará 3 moedas
-                    para assassinar uma carta/vida de{" "}
+                    fez a jogada {cartas[doubtAction?.doubtActionType]} e pagará
+                    3 moedas para assassinar uma carta/vida de{" "}
                     {doubtAction?.victim?.username}. Você pode duvidar que ele
                     seja {cartas[doubtAction?.doubtActionType]},{" "}
                     {String(user_id) === String(doubtAction?.victim?.id) &&
@@ -640,12 +638,11 @@ export default function Sala() {
                     {String(
                       room?.users[Number(Number(room.round) - 1)]?.username
                     )}{" "}
-                    fez a jogada "Poder", dizendo ser{" "}
-                    {cartas[doubtAction?.doubtActionType]} e trocará toda suas
-                    cartas por novas. Você pode duvidar que ele seja{" "}
-                    {cartas[doubtAction?.doubtActionType]} ou apenas passar. (Se
-                    um duvidar do outro, quem mentir perde uma vida e uma
-                    carta).
+                    fez a jogada {cartas[doubtAction?.doubtActionType]} e
+                    trocará toda suas cartas por novas. Você pode duvidar que
+                    ele seja {cartas[doubtAction?.doubtActionType]} ou apenas
+                    passar. (Se um duvidar do outro, quem mentir perde uma vida
+                    e uma carta).
                   </strong>
 
                   <div className={styles.movesBottom}>
