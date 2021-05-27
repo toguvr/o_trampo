@@ -536,11 +536,11 @@ export default function Sala() {
                     {String(
                       room?.users[Number(Number(room.round) - 1)]?.username
                     )}{" "}
-                    fez a jogada {cartas[doubtAction?.doubtActionType]},
-                    gostaria de duvidar que ele tem esta carta?. (Se ele
-                    realmente for {cartas[doubtAction?.doubtActionType]}, você
-                    perde uma vida e uma carta, se não, ele perde uma vida e uma
-                    carta.)
+                    fez a jogada {cartas[doubtAction?.doubtActionType]} e
+                    ganhará 3 moedas, gostaria de duvidar que ele tem esta
+                    carta?. (Se ele realmente for{" "}
+                    {cartas[doubtAction?.doubtActionType]}, você perde uma vida
+                    e uma carta, se não, ele perde uma vida e uma carta.)
                   </strong>
 
                   <div className={styles.movesBottom}>
