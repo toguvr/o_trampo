@@ -42,6 +42,7 @@ export default function Sala() {
   const [victim, setVictim] = useState({} as User);
   const [doubtAction, setDoubtAction] = useState({} as SocketReturnProps);
   const [doubtActionType, setDoubtActionType] = useState(0);
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     if (room.id) {
@@ -870,10 +871,14 @@ export default function Sala() {
   };
 
   const doAction = async (action) => {
+    if (isLoading) {
+      return toast.warning("Espere sua jogada terminar");
+    }
     if (action === 4 && !victim?.id) {
       return toast.warning("Selecione uma vitima");
     }
     try {
+      setLoading(true);
       const response = await api.post(`/sala/action`, {
         sala_id,
         user_id,
@@ -892,6 +897,8 @@ export default function Sala() {
       setRoom({ ...response.data, me, opponents });
     } catch (err) {
       toast.error(err?.response?.data?.message || "Start da sala falhou");
+    } finally {
+      setLoading(false);
     }
   };
 
