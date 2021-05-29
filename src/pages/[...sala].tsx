@@ -698,7 +698,7 @@ export default function Sala() {
               <div className={styles.movesContent}>
                 <strong>
                   <b>Duvidar</b>: O Jogador {doubtAction?.username} fez a jogada
-                  "Usar Duque", você pode duvidas que ele tenha o "Duque". (Se
+                  "Usar Duque", você pode duvidar que ele tenha o "Duque". (Se
                   ele não for o Duque ele perde uma vida e uma carta, se for,
                   você perde.)
                 </strong>
