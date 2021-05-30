@@ -264,7 +264,6 @@
     // }
 
     > h1 {
-      background: var(--blue);
       width: 40px;
       height: 40px;
       border-radius: 50%;
@@ -295,10 +294,12 @@
 }
 
 .selected {
+  background: var(--blue);
   border: 2px solid var(--orange);
 }
 
 .notSelected {
+  background: var(--blue);
   border: 2px solid #000000;
 }
 
@@ -308,4 +309,98 @@
 
 .notMyRound {
   border: 1px solid #000000;
+}
+
+.chatContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .chatContent {
+    width: 100%;
+    height: 220px;
+    overflow-y: scroll;
+    padding: 8px 0;
+    display: flex;
+    flex-direction: column;
+
+    .chatContentMe {
+      align-self: flex-end;
+      padding: 4px;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border: 1px solid #161d23;
+      background: var(--blue);
+      border-radius: 10px 0 10px 10px;
+      max-width: 70%;
+      margin: 4px 0;
+    }
+
+    .chatContentOther {
+      align-self: flex-start;
+      padding: 4px;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border: 1px solid #161d23;
+      background: var(--gray-700);
+      border-radius: 0 10px 10px 10px;
+      max-width: 70%;
+      margin: 4px 0;
+    }
+  }
+
+  .sendChat {
+    width: 100%;
+    margin-top: 4px;
+
+    > input {
+      background: var(--blue);
+      width: calc(100% - 100px);
+      // margin-bottom: 21px;
+      height: 31px;
+      border: 2px solid #161d23;
+      box-sizing: border-box;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+      color: var(--white);
+      padding: 4px;
+
+      @media (min-width: 720px) {
+        height: 60px;
+        margin-bottom: 20px;
+        font-size: 32px;
+      }
+    }
+    input::placeholder {
+      color: var(--gray-400);
+    }
+
+    button {
+      margin-left: 7px;
+      background: var(--blue);
+      width: 93px;
+      height: 31px;
+      border: 2px solid #161d23;
+      box-sizing: border-box;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+
+      @media (min-width: 720px) {
+        width: 400px;
+        height: 60px;
+        font-size: 32px;
+        margin-top: 40px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+
+.chatButton {
+  border: 2px solid #161d23;
+  background: var(--orange);
+}
+
+.gameButton {
+  border: 2px solid #161d23;
+  background: var(--blue);
 }

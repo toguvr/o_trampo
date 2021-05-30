@@ -1,7 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Player from "../components/player";
 import styles from "../styles/sala.module.scss";
-import { RiHeartFill, RiMoneyDollarCircleFill } from "react-icons/ri";
+import {
+  RiEyeCloseLine,
+  RiEyeLine,
+  RiHeartFill,
+  RiMoneyDollarCircleFill,
+} from "react-icons/ri";
 import { CgLogOut } from "react-icons/cg";
 import { api } from "../services/api";
 import { useRouter } from "next/router";
@@ -43,6 +48,11 @@ export default function Sala() {
   const [doubtAction, setDoubtAction] = useState({} as SocketReturnProps);
   const [doubtActionType, setDoubtActionType] = useState(0);
   const [isLoading, setLoading] = useState(false);
+  const [chatMode, setChatMode] = useState(false);
+  const [eye, setEye] = useState(true);
+  const [newMsg, setNewMsg] = useState(true);
+  const [msgTyped, setMsgTyped] = useState("");
+  const [msgs, setMsgs] = useState([]);
 
   useEffect(() => {
     if (room.id) {
@@ -118,6 +128,24 @@ export default function Sala() {
         sala_id,
         user_id,
         victim_id: doubtAction?.user_id,
+        doubt,
+        doubtActionType: doubtAction?.doubtActionType,
+      });
+      setDoAction(6);
+    } catch (err) {
+      toast.warning(err?.response?.data?.message || "Não foi possível duvidar");
+    } finally {
+      loading.stop();
+    }
+  };
+
+  const doubtCondessaAction = async (doubt) => {
+    loading.start();
+    try {
+      const response = await api.post(`/sala/duvido/poder/condessa`, {
+        sala_id,
+        user_id,
+        victim_id: null,
         doubt,
         doubtActionType: doubtAction?.doubtActionType,
       });
@@ -229,6 +257,9 @@ export default function Sala() {
   };
 
   const startTimeAction = async (action, doubtActionType) => {
+    console.log(room.me.cards.length);
+    console.log(doubtActionType);
+    console.log(action);
     if (Number(doubtActionType) === 1 && Number(action) === 3 && !victim?.id) {
       return toast.warning("Selecione uma vítima");
     }
@@ -250,6 +281,24 @@ export default function Sala() {
       return toast.warning(
         "Você precisa de pelo menos 3 moedas para esta ação."
       );
+    }
+    if (
+      Number(doubtActionType) === 3 &&
+      Number(action) === 3 &&
+      Number(room?.users[Number(Number(room.round) - 1)]?.coins) < 5
+    ) {
+      return toast.warning(
+        "Você precisa de pelo menos 5 moedas para esta ação."
+      );
+    }
+
+    if (
+      Number(doubtActionType) === 3 &&
+      Number(action) === 3 &&
+      Number(room.me.cards.length) === 2
+    ) {
+      console.log("entendi");
+      return toast.warning("Você não pode comprar cartas, já tendo 2.");
     }
     try {
       loading.start();
@@ -329,9 +378,14 @@ export default function Sala() {
         return (
           <>
             <strong>
-              <b>{cartas[doubtActionType]}</b>: Bloqueia o assassino. (Não pode
-              ser bloqueada)
+              <b>{cartas[doubtActionType]}</b>: Paga 5 moedas e ganha uma
+              carta/vida. (Não pode ser bloqueada)
             </strong>
+            <div className={styles.movesBottom}>
+              <button onClick={() => startTimeAction(3, doubtActionType)}>
+                Pegar
+              </button>
+            </div>
           </>
         );
       case 4:
@@ -608,7 +662,7 @@ export default function Sala() {
                     {String(user_id) === String(doubtAction?.victim?.id) &&
                       "ou dizer que voce tem a carta " +
                         cartas[3] +
-                        " para cancelar a jogada dele"}
+                        " para bloquear a jogada dele"}
                     . (Se um duvidar do outro, quem mentir perde uma vida e uma
                     carta).
                   </strong>
@@ -625,6 +679,35 @@ export default function Sala() {
                         Bloquear
                       </button>
                     )}
+                  </div>
+                </div>
+              </>
+            );
+          }
+          if (Number(doubtAction?.doubtActionType) === 3) {
+            return setPlay(
+              <>
+                <h1>Jogada :</h1>
+                <div className={styles.movesContent}>
+                  <strong>
+                    <b>Comprar</b>: O Jogador{" "}
+                    {String(
+                      room?.users[Number(Number(room.round) - 1)]?.username
+                    )}{" "}
+                    fez a jogada {cartas[doubtAction?.doubtActionType]} e
+                    comprará 1 carta/vida por 5 moedas, gostaria de duvidar que
+                    ele tem esta carta?. (Se ele realmente for{" "}
+                    {cartas[doubtAction?.doubtActionType]}, você perde uma vida
+                    e uma carta, se não, ele perde uma vida e uma carta.)
+                  </strong>
+
+                  <div className={styles.movesBottom}>
+                    <button onClick={() => doubtCondessaAction(false)}>
+                      Passar
+                    </button>
+                    <button onClick={() => doubtCondessaAction(true)}>
+                      Duvidar
+                    </button>
                   </div>
                 </div>
               </>
@@ -934,6 +1017,16 @@ export default function Sala() {
     }
   }, [user_id]);
 
+  const sendMsg = () => {
+    socket.emit("newMsg", { room_id: sala_id, msg: msgTyped, user: room.me });
+    const newmsgs = [...msgs];
+    newmsgs.push({ room_id: sala_id, msg: msgTyped, user: room.me });
+
+    setMsgs(newmsgs);
+
+    setMsgTyped("");
+  };
+
   useEffect(() => {
     if (sala_id) {
       socket.emit(`newRoom`, sala_id);
@@ -944,6 +1037,14 @@ export default function Sala() {
 
       socket.on(`passOnly`, () => {
         getRoom();
+      });
+
+      socket.on(`newMsg`, ({ room_id, msg, user }) => {
+        const newmsgs = [...msgs];
+        newmsgs.push({ room_id, msg, user });
+
+        setMsgs(newmsgs);
+        setNewMsg(true);
       });
 
       socket.on(`startRoom`, () => {
@@ -1046,25 +1147,72 @@ export default function Sala() {
               : styles.notMyRound
           }`}
         >
-          {play}
-          <div className={styles.movesFooter}>
-            <h2>Seus dados: {room?.me?.username}</h2>
-            <div className={styles.datas}>
-              <div className={styles.personalData}>
-                {room?.me?.cards?.map((card) => {
-                  return <button key={card.id}>{card.name}</button>;
-                })}
+          {chatMode ? (
+            <div className={styles.chatContainer}>
+              <div className={styles.chatContent}>
+                {msgs.map((messagem) => (
+                  <div
+                    className={
+                      String(messagem.user.id) === String(user_id)
+                        ? styles.chatContentMe
+                        : styles.chatContentOther
+                    }
+                  >
+                    {messagem.user.username}: {messagem.msg}
+                  </div>
+                ))}
               </div>
-              <div className={styles.personaStars}>
-                <RiHeartFill size={25} color={"var(--gray-900)"} />
-
-                <p>{room.me?.cards.length}</p>
-                <RiMoneyDollarCircleFill size={25} color={"var(--gray-900)"} />
-
-                <p>{room.me?.coins}</p>
+              <div className={styles.sendChat}>
+                <input
+                  type="text"
+                  onChange={(e) => setMsgTyped(e.target.value)}
+                  value={msgTyped}
+                />
+                <button onClick={sendMsg}>Enviar</button>
               </div>
             </div>
-          </div>
+          ) : (
+            <>
+              {" "}
+              {play}
+              <div className={styles.movesFooter}>
+                <h2>Seus dados: {room?.me?.username}</h2>
+                {eye ? (
+                  <RiEyeLine
+                    onClick={() => setEye(!eye)}
+                    cursor="pointer"
+                    size={20}
+                  />
+                ) : (
+                  <RiEyeCloseLine
+                    onClick={() => setEye(!eye)}
+                    cursor="pointer"
+                    size={20}
+                  />
+                )}
+                <div className={styles.datas}>
+                  <div className={styles.personalData}>
+                    {room?.me?.cards?.map((card) => {
+                      return (
+                        <button key={card.id}>{eye ? card.name : "-"}</button>
+                      );
+                    })}
+                  </div>
+                  <div className={styles.personaStars}>
+                    <RiHeartFill size={25} color={"var(--gray-900)"} />
+
+                    <p>{room.me?.cards.length}</p>
+                    <RiMoneyDollarCircleFill
+                      size={25}
+                      color={"var(--gray-900)"}
+                    />
+
+                    <p>{room.me?.coins}</p>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
         </div>
         <div className={styles.movesOutBoard}>
           <h1
@@ -1099,7 +1247,17 @@ export default function Sala() {
           >
             Matar
           </h1>
-          <h1 className={styles.notSelected}>Regra</h1>
+          <h1
+            className={
+              newMsg && !chatMode ? styles.chatButton : styles.gameButton
+            }
+            onClick={() => {
+              setNewMsg(false);
+              setChatMode(!chatMode);
+            }}
+          >
+            {!chatMode ? "Chat" : "Dados"}
+          </h1>
           <h1 className={styles.notSelected} onClick={startGame}>
             New
           </h1>
