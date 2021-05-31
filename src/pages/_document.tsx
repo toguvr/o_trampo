@@ -9,9 +9,9 @@ export default class MyDocument extends Document {
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta
             name="viewport"
-            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+            content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"
           />
-          <meta name="description" content="Description" />
+          <meta name="description" content="O jogo para jogar onde estiver" />
           <meta name="keywords" content="Keywords" />
 
           <link rel="manifest" href="/manifest.json" />
