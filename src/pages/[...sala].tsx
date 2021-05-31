@@ -50,7 +50,7 @@ export default function Sala() {
   const [isLoading, setLoading] = useState(false);
   const [chatMode, setChatMode] = useState(false);
   const [eye, setEye] = useState(true);
-  const [newMsg, setNewMsg] = useState(true);
+  const [newMsg, setNewMsg] = useState(false);
   const [msgTyped, setMsgTyped] = useState("");
   const [msgs, setMsgs] = useState([]);
 
@@ -257,9 +257,6 @@ export default function Sala() {
   };
 
   const startTimeAction = async (action, doubtActionType) => {
-    console.log(room.me.cards.length);
-    console.log(doubtActionType);
-    console.log(action);
     if (Number(doubtActionType) === 1 && Number(action) === 3 && !victim?.id) {
       return toast.warning("Selecione uma vítima");
     }
@@ -1027,6 +1024,12 @@ export default function Sala() {
     setMsgTyped("");
   };
 
+  const leaveRoom = () => {
+    socket.emit("leaveRoom", sala_id);
+
+    router.push("/");
+  };
+
   useEffect(() => {
     if (sala_id) {
       socket.emit(`newRoom`, sala_id);
@@ -1097,7 +1100,7 @@ export default function Sala() {
       </Head>
       <div className={styles.roomHeader}>
         <h1>Jogadores :</h1>
-        <button onClick={() => router.push("/")}>
+        <button onClick={leaveRoom}>
           <CgLogOut size={28} color="#c92828" cursor="pointer" />
           Sair
         </button>
@@ -1173,23 +1176,27 @@ export default function Sala() {
             </div>
           ) : (
             <>
-              {" "}
               {play}
               <div className={styles.movesFooter}>
-                <h2>Seus dados: {room?.me?.username}</h2>
-                {eye ? (
-                  <RiEyeLine
-                    onClick={() => setEye(!eye)}
-                    cursor="pointer"
-                    size={20}
-                  />
-                ) : (
-                  <RiEyeCloseLine
-                    onClick={() => setEye(!eye)}
-                    cursor="pointer"
-                    size={20}
-                  />
-                )}
+                <hr />
+                <div className={styles.titleDados}>
+                  <h2>Seus dados: {room?.me?.username} </h2>
+                  {eye ? (
+                    <RiEyeLine
+                      onClick={() => setEye(!eye)}
+                      cursor="pointer"
+                      color="var(--gray-900)"
+                      size={20}
+                    />
+                  ) : (
+                    <RiEyeCloseLine
+                      onClick={() => setEye(!eye)}
+                      cursor="pointer"
+                      color="var(--gray-900)"
+                      size={20}
+                    />
+                  )}
+                </div>
                 <div className={styles.datas}>
                   <div className={styles.personalData}>
                     {room?.me?.cards?.map((card) => {
