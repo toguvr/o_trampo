@@ -1,14 +1,28 @@
 import Head from "next/head";
 import Router from "next/router";
 import { useState } from "react";
+import { CgChevronLeft, CgChevronRight } from "react-icons/cg";
 import Loader from "react-loader-spinner";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
 import styles from "../styles/home.module.scss";
+import { imagens } from "../utils";
 
 export default function Home() {
   const [values, setValues] = useState({} as { [key: string]: any });
   const [loading, setLoading] = useState(false);
+  const [imgPos, setImgPos] = useState(0);
+
+  const changeImage = async (pos) => {
+    if (imgPos < 0 && pos == -1) {
+      return;
+    } else if (imgPos >= imagens.length && pos == +1) {
+      return;
+    } else {
+      setImgPos(imgPos + pos);
+      return setValues({ ...values, avatar: imagens[imgPos + pos] });
+    }
+  };
 
   const enterRoom = async () => {
     setLoading(true);
@@ -37,13 +51,31 @@ export default function Home() {
         <meta name="description" content="login a corte" />
       </Head>
       <div className={styles.board}>
-        <img
-          src={
-            values?.avatar ||
-            "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
-          }
-          alt="Avatar"
-        />
+        <div className={styles.imageCarrousel}>
+          <CgChevronLeft
+            onClick={() => changeImage(-1)}
+            size={30}
+            cursor="pointer"
+            color={Number(imgPos) === -1 ? "var(--gray-400)" : "white"}
+          />
+          {console.log(imgPos)}
+
+          <img
+            src={
+              values?.avatar ||
+              "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/bear_russian_animal_avatar-256.png"
+            }
+            alt="Avatar"
+          />
+          <CgChevronRight
+            onClick={() => changeImage(+1)}
+            size={30}
+            cursor="pointer"
+            color={
+              Number(imgPos) === imagens.length ? "var(--gray-400)" : "white"
+            }
+          />
+        </div>
         <label>Avatar URL</label>
         <input
           value={values?.avatar}

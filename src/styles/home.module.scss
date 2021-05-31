@@ -29,17 +29,22 @@
     max-width: 1020px;
   }
 
-  img {
-    border-radius: 50%;
-    width: 80px;
-    border: 2px solid #000000;
-    height: 80px;
-    margin-bottom: 21px;
+  .imageCarrousel {
+    display: flex;
+    align-items: center;
 
-    @media (min-width: 720px) {
-      width: 160px;
-      height: 160px;
-      margin-bottom: 20px;
+    img {
+      border-radius: 50%;
+      width: 80px;
+      border: 2px solid #000000;
+      height: 80px;
+      margin-bottom: 21px;
+
+      @media (min-width: 720px) {
+        width: 160px;
+        height: 160px;
+        margin-bottom: 20px;
+      }
     }
   }
 
