@@ -347,7 +347,7 @@ export default function Sala() {
           <>
             <strong>
               <b>{cartas[doubtActionType]}</b>: Pegue 2 moedas de outro jogador
-              (pode ser bloqueado pelo {cartas[1]} ou {cartas[4]})
+              (pode ser bloqueado pelo {cartas[4]})
             </strong>
             <div className={styles.movesBottom}>
               <button onClick={() => startTimeAction(3, doubtActionType)}>
@@ -620,7 +620,7 @@ export default function Sala() {
                     2 moedas de {doubtAction?.victim?.username}. Você pode
                     duvidar que ele seja {cartas[doubtAction?.doubtActionType]}{" "}
                     {String(doubtAction?.victim?.id) === String(user_id) &&
-                      ` ou dizer que você tem ${cartas[1]} ou ${cartas[4]} para bloquear a ação dele`}
+                      ` ou dizer que você tem ${cartas[4]} para bloquear a ação dele`}
                     . (Se um duvidar do outro, quem mentir perde uma vida e uma
                     carta).
                   </strong>
@@ -825,12 +825,11 @@ export default function Sala() {
               <div className={styles.movesContent}>
                 <strong>
                   <b>Bloquear</b>: O Jogador {doubtAction?.user?.username} fez a
-                  jogada "Bloquear", dizendo ser {cartas[1]} ou {cartas[4]} e
-                  cancelará a jogada de{" "}
+                  jogada "Bloquear", dizendo ser {cartas[4]} e cancelará a
+                  jogada de{" "}
                   {room?.users[Number(Number(room.round) - 1)]?.username}. Você
-                  pode duvidar que ele tenha alguma destas cartas ou apenas
-                  passar. (Se um duvidar do outro, quem mentir perde uma vida e
-                  uma carta).
+                  pode duvidar que ele tenha esta carta ou apenas passar. (Se um
+                  duvidar do outro, quem mentir perde uma vida e uma carta).
                 </strong>
 
                 <div className={styles.movesBottom}>
